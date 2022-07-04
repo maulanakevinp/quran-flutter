@@ -24,8 +24,8 @@ mobile version from [iqbalsyamhad](https://github.com/iqbalsyamhad/Al-Quran-JSON
 ## Preview
 
 <hr>
-<img src="https://raw.githubusercontent.com/maulanakevinp/quran-flutter/master/assets/img/home.jpg" width="400px">
-<img src="https://raw.githubusercontent.com/maulanakevinp/quran-flutter/master/assets/img/ayat.jpg" width="400px">
+<img src="https://raw.githubusercontent.com/maulanakevinp/quran-flutter/master/assets/img/home.jpeg" width="400px">
+<img src="https://raw.githubusercontent.com/maulanakevinp/quran-flutter/master/assets/img/ayat.jpeg" width="400px">
 
 ## Sumber
 
