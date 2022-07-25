@@ -35,7 +35,21 @@ class _ShowState extends State<Show> {
           future: loadDaftarSurat(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              return ListDaftarAyat(surat: ayat);
+              return ListView(
+                children: [
+                  cardAyat(
+                    nomor: "", 
+                    ayat: "\u0628\u0650\u0633\u0652\u0645\u0650 \u0627\u0644\u0644\u0651\u0670\u0647\u0650 \u0627\u0644\u0631\u0651\u064e\u062d\u0652\u0645\u0670\u0646\u0650 \u0627\u0644\u0631\u0651\u064e\u062d\u0650\u064a\u0652\u0645\u0650", 
+                    terjemahan:"Dengan nama Allah Yang Maha Pengasih, Maha Penyayang."
+                  ),
+                  for (Surat surat in ayat) 
+                    cardAyat(
+                      nomor: surat.nomor,
+                      ayat: surat.ayat,
+                      terjemahan: surat.terjemahan
+                    ),
+                ],
+              );
             } else if (snapshot.hasError) {
               return const Center (
                 child: Text('Error'),
@@ -47,66 +61,53 @@ class _ShowState extends State<Show> {
       ),
     );
   }
-}
 
-class ListDaftarAyat extends StatelessWidget {
-  List<Surat> surat;
-
-  ListDaftarAyat({Key? key, required this.surat}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    
-    return ListView.builder(
-      itemCount: surat == null ? 0 : surat.length,
-      itemBuilder: (BuildContext context, int index) {
-        return Card(
-          color: Colors.black54,
-          child: Container(
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
-              children: [
-                Container
-                  (margin: const EdgeInsets.only(bottom: 10),
-                  child: Text(
-                    "(${surat[index].nomor})", 
-                    style: const TextStyle(
-                      fontSize: 18.0,
-                      // fontFamily: 'arabic',
-                      color: Colors.white
-                    ),
-                    textAlign: TextAlign.center,
-                  )
+  Card cardAyat({String? nomor, String? ayat, String? terjemahan}) {
+    return Card(
+      color: Colors.black54,
+      child: Container(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          children: [
+            if (nomor != "")
+            Container(
+              margin: const EdgeInsets.only(bottom: 10),
+              child: Text(
+                "($nomor)", 
+                style: const TextStyle(
+                  fontSize: 18.0,
+                  color: Colors.white
                 ),
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  margin: const EdgeInsets.only(bottom: 15),
-                  child: Text(
-                    "${surat[index].ayat}", 
-                    style: const TextStyle(
-                      fontSize: 35.0, 
-                      fontFamily: 'arabic',
-                      height: 2.1,
-                      color: Colors.white
-                    ), 
-                    textAlign: TextAlign.center,
-                    textDirection: TextDirection.rtl,
-                  ),
-                ),
-                Text(
-                  "${surat[index].terjemahan}", 
-                  style: const TextStyle(
-                    fontSize: 15.0,
-                    height: 1.5,
-                    color: Colors.white
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ],
+                textAlign: TextAlign.center,
+              )
             ),
-          ),
-        );
-      }
+            Container(
+              width: MediaQuery.of(context).size.width,
+              margin: const EdgeInsets.only(bottom: 15),
+              child: Text(
+                ayat!, 
+                style: const TextStyle(
+                  fontSize: 35.0, 
+                  fontFamily: 'arabic',
+                  height: 2.1,
+                  color: Colors.white
+                ), 
+                textAlign: TextAlign.center,
+                textDirection: TextDirection.rtl,
+              ),
+            ),
+            Text(
+              terjemahan!, 
+              style: const TextStyle(
+                fontSize: 15.0,
+                height: 1.5,
+                color: Colors.white
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
